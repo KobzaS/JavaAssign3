@@ -47,10 +47,12 @@ class Assign3F2017
         
     public void arrayDisplay(String LiPl[], String FuNa[])
     {
-
+        sc1.scrollScreen('=',30,1); 
+        System.out.println("License Plate \tFull Name");
+        System.out.println("============= \t=========");
         for (int i = 0; i < LiPl.length; i++)
         {
-            System.out.println(LiPl[i] + " " + FuNa[i]);
+            System.out.println(LiPl[i] + "\t\t \t" + FuNa[i]);
         }
     }
     public void binSrch(String LiPl[], String FuNa[])
