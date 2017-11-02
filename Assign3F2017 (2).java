@@ -17,7 +17,7 @@ class Assign3F2017
         //A3.binSrch(licensePlate, fullName);
         //A3.arrayDisplay(licensePlate, fullName);
         A3.generateLicensePlate(fullName, licensePlate);
-        //A3.arrayDisplay(licensePlate, fullName);
+        A3.arrayDisplay(licensePlate, fullName);
         
         
     }
@@ -44,10 +44,14 @@ class Assign3F2017
         }
     }
     
+        
     public void arrayDisplay(String LiPl[], String FuNa[])
     {
-        System.out.println(LiPl[tTest] + " " + FuNa[tTest]);
-        tTest = tTest + 1;
+
+        for (int i = 0; i < LiPl.length; i++)
+        {
+            System.out.println(LiPl[i] + " " + FuNa[i]);
+        }
     }
     public void binSrch(String LiPl[], String FuNa[])
     {
@@ -91,7 +95,7 @@ class Assign3F2017
             
             if (con == 1)
             {
-               System.out.println(Term + " duplicate license plate, regenerating");
+               System.out.println("\t\t\t" + Term + " duplicate license plate, regenerating");
                break;
             }
         }
@@ -168,7 +172,7 @@ class Assign3F2017
                else if (dupSearch(lp, tempString) == 0)
                {
                   lp[i] = tempString;
-                  arrayDisplay(ar, lp);
+                  System.out.println(lp[i] + " " + ar[i]);
                }
          }
     }
