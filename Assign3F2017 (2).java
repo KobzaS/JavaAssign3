@@ -12,6 +12,7 @@ class Assign3F2017
     String srch;
     public static void main(String[] Args)
     { 
+        Screen sc1 = new Screen();
         Assign3F2017 A3 = new Assign3F2017();
         String[] fullName = {"Terri Polo","Lee Majors","Peter Quinn","Terry Palo","Terri Polo","Terri Polo","guinevere shakespeare","Terri Pole","Terry Poly"};
         String[] licensePlate = {"","","","","","","","",""};
@@ -24,9 +25,13 @@ class Assign3F2017
             if (found >= 0)
             {
                 System.out.println("Name: " + fullName[found] + " ====> License Plate: " + licensePlate[found]);
+                sc1.scrollScreen('+',30,1);
             }
             else if (found < -1)
+            {
                 System.out.println(A3.srch + " is not found");
+                sc1.scrollScreen('+',30,1);
+            }
         }
         
     }
@@ -67,8 +72,8 @@ class Assign3F2017
     {
         String inp;
         int x = -2;
-        System.out.println("Enter the license plate you wish to search for (e or E to exit): ");
-        inp = ac.AcceptInputString();
+        System.out.print("Enter the license plate you wish to search for (e or E to exit): ");
+        inp = ac.AcceptInputString().toUpperCase().trim();
         srch = inp;
         if (inp.compareToIgnoreCase("e") != 0)
         {

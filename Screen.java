@@ -12,7 +12,7 @@ public class Screen
    { 
 	   for (int a = 0; a < numline; a++) 
       {
-        System.out.println("");
+        //System.out.println("");
         for (int b = 0; b < numchar; b++) 
         {
            System.out.print(displaychar);
