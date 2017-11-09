@@ -8,6 +8,7 @@ class Assign3F2017
     Accept ac = new Accept();
     Screen sc1 = new Screen();
     int tTest = 0;
+    static int exit = -1; 
     String srch;
     public static void main(String[] Args)
     { 
@@ -18,14 +19,15 @@ class Assign3F2017
         A3.sortArrayAsc(licensePlate, fullName);
         A3.arrayDisplay(licensePlate, fullName);
         
-        int found = A3.binSrch(licensePlate, fullName);
-        if (found >= 0)
-        {
-            System.out.println("Name: " + fullName[found] + " ====> License Plate: " + licensePlate[found]);
+        while (exit < 0){
+            int found = A3.binSrch(licensePlate, fullName);
+            if (found >= 0)
+            {
+                System.out.println("Name: " + fullName[found] + " ====> License Plate: " + licensePlate[found]);
+            }
+            else if (found < -1)
+                System.out.println(A3.srch + " is not found");
         }
-        else
-            System.out.println(A3.srch + " is not found");
-        
         
     }
     public void sortArrayAsc(String LiPl[], String FuNa[])
@@ -64,7 +66,7 @@ class Assign3F2017
     public int binSrch(String LiPl[], String FuNa[])
     {
         String inp;
-        int x = -1;
+        int x = -2;
         System.out.println("Enter the license plate you wish to search for (e or E to exit): ");
         inp = ac.AcceptInputString();
         srch = inp;
@@ -77,6 +79,11 @@ class Assign3F2017
                     x = i;
                 }
             }
+        }
+        else
+        {
+            exit = 0;
+            x = -1;
         }
         return x;
     }
