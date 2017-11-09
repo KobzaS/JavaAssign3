@@ -8,16 +8,23 @@ class Assign3F2017
     Accept ac = new Accept();
     Screen sc1 = new Screen();
     int tTest = 0;
+    String srch;
     public static void main(String[] Args)
     { 
         Assign3F2017 A3 = new Assign3F2017();
         String[] fullName = {"Terri Polo","Lee Majors","Peter Quinn","Terry Palo","Terri Polo","Terri Polo","guinevere shakespeare","Terri Pole","Terry Poly"};
         String[] licensePlate = {"","","","","","","","",""};
-        //A3.sortArrayAsc(licensePlate, fullName);
-        //A3.binSrch(licensePlate, fullName);
-        //A3.arrayDisplay(licensePlate, fullName);
         A3.generateLicensePlate(fullName, licensePlate);
+        A3.sortArrayAsc(licensePlate, fullName);
         A3.arrayDisplay(licensePlate, fullName);
+        
+        int found = A3.binSrch(licensePlate, fullName);
+        if (found >= 0)
+        {
+            System.out.println("Name: " + fullName[found] + " ====> License Plate: " + licensePlate[found]);
+        }
+        else
+            System.out.println(A3.srch + " is not found");
         
         
     }
@@ -37,10 +44,9 @@ class Assign3F2017
                  FuNa[index] = FuNa[index+1];
                  LiPl[index+1] = temp;
                  FuNa[index+1] = temp2;
-                 System.out.print(LiPl[index]+ " " + LiPl[index+1] + " " + FuNa[index] + " " + FuNa[index+1] + " \n");
-                 
+                 //System.out.print(LiPl[index]+ " " + LiPl[index+1] + " " + FuNa[index] + " " + FuNa[index+1] + " \n");
                  }
-           }
+            }
         }
     }
     
@@ -55,31 +61,24 @@ class Assign3F2017
             System.out.println(LiPl[i] + "\t\t \t" + FuNa[i]);
         }
     }
-    public void binSrch(String LiPl[], String FuNa[])
+    public int binSrch(String LiPl[], String FuNa[])
     {
         String inp;
-        int True = 0;
-        int x = 0;
+        int x = -1;
         System.out.println("Enter the license plate you wish to search for (e or E to exit): ");
         inp = ac.AcceptInputString();
+        srch = inp;
         if (inp.compareToIgnoreCase("e") != 0)
         {
             for (int i = 0; i < LiPl.length; i++)
             {
                 if (inp.compareToIgnoreCase(LiPl[i]) == 0)
                 {   
-                    True = 1;
                     x = i;
                 }
-            
             }
-            if (True == 1)
-            {
-                System.out.println("Name: " + FuNa[x] + " ====> License Plate: " + LiPl[x]);
-            }
-            else
-                System.out.println(inp + " is not found");
         }
+        return x;
     }
     public int dupSearch(String LiPl[], String Term)
     {
@@ -113,7 +112,6 @@ class Assign3F2017
         
         for (int i = 0; i < ar.length; i++)
         {
-
                tempString = "";
                a = rand.nextInt(3);
                switch (a){
@@ -130,15 +128,13 @@ class Assign3F2017
                      first = 'a';
                      break;
                }
-               second = ar[i].charAt(0);
-               second = Character.toUpperCase(second);
-                  
+               second = Character.toUpperCase(ar[i].charAt(0));
+                                
                for (int i2 = 0; i2 < ar[i].length(); i2++)
                {
                   if(ar[i].charAt(i2) == ' ')
                   {
-                     third = ar[i].charAt(i2 + 1);
-                     third = Character.toUpperCase(third);
+                     third = Character.toUpperCase(ar[i].charAt(i2 + 1));
                      break;
                   }
                   else
@@ -165,7 +161,6 @@ class Assign3F2017
                
                check = dupSearch(lp, tempString);
   
-               //lp[i] = tempString;
                if (dupSearch(lp, tempString) == 1)
                {
                   lp[i] = "";
@@ -176,6 +171,6 @@ class Assign3F2017
                   lp[i] = tempString;
                   System.out.println(lp[i] + " " + ar[i]);
                }
-         }
-    }
+          }
+     }
 }
