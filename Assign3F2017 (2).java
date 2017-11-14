@@ -1,15 +1,12 @@
 import java.util.*;
 
-
-
-
 class Assign3F2017
 {
     Accept ac = new Accept();
     Screen sc1 = new Screen();
-    int tTest = 0;
-    static int exit = -1; 
+    int exit = -1; 
     String srch;
+    
     public static void main(String[] Args)
     { 
         Screen sc1 = new Screen();
@@ -20,14 +17,14 @@ class Assign3F2017
         A3.sortArrayAsc(licensePlate, fullName);
         A3.arrayDisplay(licensePlate, fullName);
         
-        while (exit < 0){
+        while (A3.exit == -1){
             int found = A3.binSrch(licensePlate, fullName);
             if (found >= 0)
             {
                 System.out.println("Name: " + fullName[found] + " ====> License Plate: " + licensePlate[found]);
                 sc1.scrollScreen('+',30,1);
             }
-            else if (found < -1)
+            else if (found == -1)
             {
                 System.out.println(A3.srch + " is not found");
                 sc1.scrollScreen('+',30,1);
@@ -35,6 +32,7 @@ class Assign3F2017
         }
         
     }
+    
     public void sortArrayAsc(String LiPl[], String FuNa[])
     {
         String temp, temp2;
@@ -51,12 +49,10 @@ class Assign3F2017
                  FuNa[index] = FuNa[index+1];
                  LiPl[index+1] = temp;
                  FuNa[index+1] = temp2;
-                 //System.out.print(LiPl[index]+ " " + LiPl[index+1] + " " + FuNa[index] + " " + FuNa[index+1] + " \n");
                  }
             }
         }
     }
-    
         
     public void arrayDisplay(String LiPl[], String FuNa[])
     {
@@ -65,13 +61,14 @@ class Assign3F2017
         System.out.println("============= \t=========");
         for (int i = 0; i < LiPl.length; i++)
         {
-            System.out.println(LiPl[i] + "\t\t \t" + FuNa[i]);
+            System.out.println(LiPl[i] + "\t\t " + FuNa[i]);
         }
     }
+    
     public int binSrch(String LiPl[], String FuNa[])
     {
         String inp;
-        int x = -2;
+        int x = -1;
         System.out.print("Enter the license plate you wish to search for (e or E to exit): ");
         inp = ac.AcceptInputString().toUpperCase().trim();
         srch = inp;
@@ -88,10 +85,11 @@ class Assign3F2017
         else
         {
             exit = 0;
-            x = -1;
+            x = -2;
         }
         return x;
     }
+    
     public int dupSearch(String LiPl[], String Term)
     {
       int con = 0;
@@ -114,18 +112,19 @@ class Assign3F2017
         }
         return con;
     }
+    
     public void generateLicensePlate(String ar[], String lp[])
     {
         Random rand = new Random();
-        int a, temp, fourth, sixth, check;
+        int a, fourth, sixth;
         char first = 'a', second = 'a', third = 'a', fifth = 'a';
         String tempString = "";
-        boolean chCheck = true;
         
         for (int i = 0; i < ar.length; i++)
         {
                tempString = "";
                a = rand.nextInt(3);
+               //First license plate character generation
                switch (a){
                   case 0:
                      first = 'X';
@@ -136,12 +135,12 @@ class Assign3F2017
                   case 2:
                      first = 'Z';
                      break;
-                  default:
-                     first = 'a';
-                     break;
                }
+               
+               //Second license plate character generation
                second = Character.toUpperCase(ar[i].charAt(0));
-                                
+                    
+               //Third license plate character generation          
                for (int i2 = 0; i2 < ar[i].length(); i2++)
                {
                   if(ar[i].charAt(i2) == ' ')
@@ -149,12 +148,9 @@ class Assign3F2017
                      third = Character.toUpperCase(ar[i].charAt(i2 + 1));
                      break;
                   }
-                  else
-                  {
-                     third = 'a';  
-                  }
                }
                
+               //Fourth & fifth license plate character generation
                if ((ar[i].length() - 1) < 10)
                {
                   fourth = (ar[i].length() - 1);
@@ -165,21 +161,23 @@ class Assign3F2017
                   fourth = ar[i].length()-1;
                   fifth = 'a';
                }
+               
+               //Sixth license plate character generation
                sixth = (rand.nextInt(3) + 5);
                if (fifth == 'a')
                   tempString = (first + "" + second + "" + third + "" + fourth + "" + sixth);   
                else
                  tempString = (first + "" + second + "" + third + "" + fourth + "" + fifth + "" + sixth);
-               
-               check = dupSearch(lp, tempString);
-  
+                 
+               //Duplicate plate checking
                if (dupSearch(lp, tempString) == 1)
                {
-                  lp[i] = "";
+                  //If duplicate exists go back into same array slot and try again
                   i = i - 1;
                }
                else if (dupSearch(lp, tempString) == 0)
                {
+                  //If no duplicate exists assign and print plate
                   lp[i] = tempString;
                   System.out.println(lp[i] + " " + ar[i]);
                }
